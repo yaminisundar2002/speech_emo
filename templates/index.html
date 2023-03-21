@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href='https://fonts.googleapis.com/css?family=Dancing Script' rel='stylesheet'>
+    <style>
+      .pixelated {
+  image-rendering: pixelated;
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimizeQuality;
+  
+}
+      body {
+        background-image: url("{{ url_for('static', filename='bg.jpg') }}");
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: cover;
+        
+        background-position:50% 30%;
+
+       
+        
+      }
+      form{
+        padding: 45px;
+      }
+      </style>
+    <meta charset="UTF-8">
+    <title>Speech Emotion Classifier | Record </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    
+  </head>
+  <body >
+    <h1  style="color:rgb(137, 16, 77);font-family:'Dancing Script';font-size: 600%;"> &nbsp;&nbsp;Speech Emotion <br>&nbsp;&nbsp;Detection</h1>
+    
+    <form class="form-group" action="/index" method="POST">
+    <div id="formats">
+      <input name="file" type="file" accept=".mp3,.wav" id="file" />
+      <br>
+      <br>
+      <audio name="recorded" id="player" controls></audio><br>
+  
+    </div>
+    <br>
+    <input type="submit" name="submit" style="padding:50px;background-color:rgb(230, 176, 200);" value="Predict">
+  </form>
+
+    <script>
+      const recorder = document.getElementById('file');
+      const player = document.getElementById('player');
+    
+      recorder.addEventListener('change', function (e) {
+          const file = e.target.files[0];
+          const url = URL.createObjectURL(file);
+          // Do something with the audio file.
+          player.src = url;
+      });
+     //thinking of creating a button and onClick event  and use url
+   
+      </script>
+  <div style="font-family:cursive;font-size:large;padding:45px" class="alert alert-info" role="alert">
+      Emotion predicted is {{ msg }}
+  </div>
+    
+  </body>
+</html>
